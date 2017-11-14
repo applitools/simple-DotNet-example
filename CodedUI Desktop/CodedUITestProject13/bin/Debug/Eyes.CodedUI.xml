@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Eyes.CodedUI</name>
+    </assembly>
+    <members>
+        <member name="T:Applitools.CodedUI.Eyes">
+            <summary>
+            Applitools Eyes Coded UI API.
+            </summary>
+        </member>
+        <member name="M:Applitools.CodedUI.Eyes.#ctor(System.Uri)">
+            <summary>
+            Creates a new Eyes instance that interacts with the Eyes Server at the 
+            specified url.
+            </summary>
+            <param name="serverUrl">The Eyes server URL.</param>
+        </member>
+        <member name="M:Applitools.CodedUI.Eyes.#ctor">
+            <summary>
+            Creates a new Eyes instance that interacts with the Eyes cloud service.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Applitools.CodedUI.Eyes.Open(Microsoft.VisualStudio.TestTools.UITesting.UITestControl,System.String,System.String,System.Drawing.Size)" -->
+        <member name="M:Applitools.CodedUI.Eyes.Open(Microsoft.VisualStudio.TestTools.UITesting.UITestControl,System.String,System.String)">
+            <summary>
+            Starts a new test that does not dictate the viewport size of the application under
+            test.
+            </summary>
+        </member>
+        <member name="M:Applitools.CodedUI.Eyes.CheckWindow(System.String)">
+            <summary>
+            Takes a snapshot of the application under test and matches it with
+            the expected output.
+            </summary>
+            <param name="tag">An optional tag to be associated with the snapshot.</param>
+            <exception cref="!:Applitools.Eyes.TestFailedException">
+            Thrown if a mismatch is detected and immediate failure reports are enabled.</exception>
+        </member>
+        <member name="M:Applitools.CodedUI.Eyes.CheckWindow(System.TimeSpan,System.String)">
+            <summary>
+            Takes a snapshot of the application under test and matches it with
+            the expected output.
+            </summary>
+            <param name="matchTimeout">The amount of time to retry matching</param>
+            <param name="tag">An optional tag to be associated with the snapshot.</param>
+            <exception cref="!:Applitools.Eyes.TestFailedException">
+            Thrown if a mismatch is detected and immediate failure reports are enabled.</exception>
+        </member>
+        <member name="M:Applitools.CodedUI.Eyes.CheckRegion(Microsoft.VisualStudio.TestTools.UITesting.UITestControl,System.String)">
+            <summary>
+            Takes a snapshot of the specified control of the application under test and matches it 
+            with the expected region output.
+            </summary>
+            <param name="control">The control to check</param>
+            <param name="tag">An optional tag to be associated with the snapshot.</param>
+            <exception cref="!:Applitools.Eyes.TestFailedException">
+            Thrown if a mismatch is detected and immediate failure reports are enabled.</exception>
+        </member>
+        <member name="M:Applitools.CodedUI.Eyes.CheckRegion(Microsoft.VisualStudio.TestTools.UITesting.UITestControl,System.TimeSpan,System.String)">
+            <summary>
+            Takes a snapshot of the specified control of the application under test and matches it 
+            with the expected region output.
+            </summary>
+            <param name="control">The control to check</param>
+            <param name="matchTimeout">The amount of time to retry matching</param>
+            <param name="tag">An optional tag to be associated with the snapshot.</param>
+            <exception cref="!:Applitools.Eyes.TestFailedException">
+            Thrown if a mismatch is detected and immediate failure reports are enabled.</exception>
+        </member>
+        <member name="M:Applitools.CodedUI.Eyes.CheckRegion(System.Drawing.Rectangle,System.String)">
+            <summary>
+            Takes a snapshot of the specified region of the application under test and matches it 
+            with the expected region output.
+            </summary>
+            <param name="region">The region to check</param>
+            <param name="tag">An optional tag to be associated with the snapshot.</param>
+            <exception cref="!:Applitools.Eyes.TestFailedException">
+            Thrown if a mismatch is detected and immediate failure reports are enabled.</exception>
+        </member>
+        <member name="M:Applitools.CodedUI.Eyes.CheckRegion(System.Drawing.Rectangle,System.TimeSpan,System.String)">
+            <summary>
+            Takes a snapshot of the specified region of the application under test and matches it 
+            with the expected region output.
+            </summary>
+            <param name="matchTimeout">The amount of time to retry matching</param>
+            <param name="region">The region to check</param>
+            <param name="tag">An optional tag to be associated with the snapshot.</param>
+            <exception cref="!:Applitools.Eyes.TestFailedException">
+            Thrown if a mismatch is detected and immediate failure reports are enabled.</exception>
+        </member>
+        <member name="M:Applitools.CodedUI.Eyes.InRegion(System.Drawing.Rectangle)">
+            <summary>
+            Specifies a region of the current application window.
+            </summary>
+        </member>
+        <member name="M:Applitools.CodedUI.Eyes.InRegion(Microsoft.VisualStudio.TestTools.UITesting.UITestControl)">
+            <summary>
+            Specifies a region of a control of the current application window.
+            </summary>
+        </member>
+        <member name="T:Applitools.CodedUI.InRegion">
+            <summary>
+            An <see cref="T:Applitools.CodedUI.InRegion"/> API.
+            </summary>
+        </member>
+        <member name="M:Applitools.CodedUI.InRegion.#ctor(Applitools.CodedUI.Eyes,Applitools.InRegionBase)">
+            <summary>
+            Creates a new <see cref="T:Applitools.CodedUI.InRegion"/> instance.
+            </summary>
+        </member>
+        <member name="M:Applitools.CodedUI.InRegion.And(System.Drawing.Rectangle)">
+            <summary>
+            Add another window region.
+            </summary>
+        </member>
+        <member name="M:Applitools.CodedUI.InRegion.And(Microsoft.VisualStudio.TestTools.UITesting.UITestControl)">
+            <summary>
+            Add another window region.
+            </summary>
+        </member>
+        <member name="M:Applitools.CodedUI.InRegion.GetText">
+            <summary>
+            Gets the text found in this region.
+            </summary>
+        </member>
+        <member name="T:Applitools.CodedUI.InRegions">
+            <summary>
+            An <see cref="T:Applitools.CodedUI.InRegions"/> API.
+            </summary>
+        </member>
+        <member name="M:Applitools.CodedUI.InRegions.#ctor(Applitools.CodedUI.Eyes,Applitools.InRegionsBase)">
+            <summary>
+            Creates a new <see cref="T:Applitools.CodedUI.InRegions"/> instance.
+            </summary>
+        </member>
+        <member name="M:Applitools.CodedUI.InRegions.And(System.Drawing.Rectangle)">
+            <summary>
+            Adds additional region to this sequence of regions.
+            </summary>
+        </member>
+        <member name="M:Applitools.CodedUI.InRegions.And(Microsoft.VisualStudio.TestTools.UITesting.UITestControl)">
+            <summary>
+            Adds additional region to this sequence of regions.
+            </summary>
+        </member>
+        <member name="M:Applitools.CodedUI.InRegions.GetText">
+            <summary>
+            Gets the text found in this sequence of regions.
+            </summary>
+        </member>
+    </members>
+</doc>

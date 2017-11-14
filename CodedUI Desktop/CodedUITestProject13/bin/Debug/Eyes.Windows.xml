@@ -1,0 +1,1060 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Eyes.Windows</name>
+    </assembly>
+    <members>
+        <member name="T:Applitools.Correlate.Capture.GuiCapturer">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.Capture.GuiCapturer.#ctor(Applitools.Utils.Tracer,Applitools.Correlate.Capture.ILowLevelCaptureApi)">
+            <summary>
+            Creates a new <see cref="T:Applitools.Correlate.Capture.GuiCapturer"/> instance.
+            </summary>
+        </member>
+        <member name="P:Applitools.Correlate.Capture.GuiCapturer.MonitorHost">
+            <summary>
+            Whether to monitor the process hosting this <see cref="T:Applitools.Correlate.Capture.GuiCapturer"/> instance.
+            </summary>
+        </member>
+        <member name="P:Applitools.Correlate.Capture.GuiCapturer.MonitorProcessesByName">
+            <summary>
+            A regex matched against the names of processes to monitor or <c>null</c> to monitor
+            all processes.
+            </summary>
+        </member>
+        <member name="P:Applitools.Correlate.Capture.GuiCapturer.MonitorProcessesById">
+            <summary>
+            An id of a process to monitor or -1 to monitor all processes.
+            </summary>
+        </member>
+        <member name="P:Applitools.Correlate.Capture.GuiCapturer.KillMonitoredProcess">
+            <summary>
+            Whether to kill the process of id <see cref="P:Applitools.Correlate.Capture.GuiCapturer.MonitorProcessesById"/> when this object
+            is disposed.
+            </summary>
+        </member>
+        <member name="P:Applitools.Correlate.Capture.GuiCapturer.MonitorWindowsByTitle">
+            <summary>
+            A regex matched against the titles of windows to monitor or <c>null</c> to monitor
+            all windows.
+            </summary>
+        </member>
+        <member name="P:Applitools.Correlate.Capture.GuiCapturer.CapturePadding">
+            <summary>
+            Inner window padding defining the region to capture or <c>null</c> to capture the
+            entire window.
+            </summary>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.GuiCapturer.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.Capture.GuiCapturer.StartMonitoring(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.Capture.GuiCapturer.StopMonitoring">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.Capture.GuiCapturer.Capture(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.Capture.GuiCapturer.Configure(Applitools.Utils.Config.IReadAccessor{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.Capture.GuiCapturer.ClearCaptureBackground_">
+            <summary>
+            Forces the capture background to clear.
+            </summary>
+            <remarks>
+            This is a workaround to get the most out of the current low level capture 
+            implementation. This could be improved.
+            </remarks>
+        </member>
+        <member name="T:Applitools.Correlate.Capture.IGuiCapturer">
+            <summary>
+            Captures window images and hid events.
+            </summary>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.IGuiCapturer.StartMonitoring(System.Boolean)">
+            <summary>
+            Start monitoring active applications.
+            </summary>
+            <param name="monitorHid">Whether or not to monitor HID actions</param>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.IGuiCapturer.StopMonitoring">
+            <summary>
+            Stop monitoring active applications.
+            </summary>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.IGuiCapturer.Capture(System.Boolean)">
+            <summary>
+            Returns a <see cref="T:Applitools.Correlate.GuiCapture"/> instance of the currently active window or
+            <c>null</c> if the active window should not be monitored.
+            The caller is responsible for disposing of the capture.
+            </summary>
+            <param name="standalone">
+            Whether this is a standalone capture or part of a burst
+            </param>
+        </member>
+        <member name="T:Applitools.Correlate.Capture.ILowLevelCaptureApi">
+            <summary>
+            Low level Api for capturing GUI events and entities.
+            </summary>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.ILowLevelCaptureApi.StartMonitoring(System.Boolean)">
+            <summary>
+            Starts monitoring.
+            </summary>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.ILowLevelCaptureApi.GetWindowFromPoint(System.Drawing.Point)">
+            <summary>
+            Gets a handle to the window located at the input point (relative to the desktop) 
+            or <c>IntPtr.Zero</c> if no such window exists
+            </summary>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.ILowLevelCaptureApi.GetWindowInfo(System.IntPtr)">
+            <summary>
+            Gets the details of the input window.
+            </summary>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.ILowLevelCaptureApi.GetAncestorWindow(System.IntPtr,System.Boolean)">
+            <summary>
+            Gets the root or root owner window of the input window.
+            </summary>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.ILowLevelCaptureApi.CaptureWindow(System.IntPtr,System.Boolean,Applitools.Utils.Geometry.RectangularMargin,System.Boolean,System.Int32)">
+            <summary>
+            Captures the contents of the input region of the input window.
+            </summary>
+            <param name="window">Window to capture</param>
+            <param name="clientArea">Whether to capture only the client area</param>
+            <param name="padding">
+            Inner window padding defining the region to capture or <c>null</c> to capture the
+            entire window
+            </param>
+            <param name="fromScreen">Whether to capture screen pixels or attempt to draw
+            window to the returned bitmap
+            </param>
+            <param name="redrawWait">
+            Delay in milliseconds to allow window background drawing to complete before 
+            capturing.
+            </param>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.ILowLevelCaptureApi.GetActiveWindow">
+            <summary>
+            Gets the currently active window or <c>IntPtr.Zero</c> if there is no active
+            window.
+            </summary>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.ILowLevelCaptureApi.PlaceWindowAbove(System.IntPtr,System.IntPtr)">
+            <summary>
+            Places <c>window1</c> above <c>window2</c> without activating <c>window1</c>
+            </summary>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.ILowLevelCaptureApi.ActivateWindow(System.IntPtr)">
+            <summary>
+            Makes the input window the active window.
+            </summary>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.ILowLevelCaptureApi.IsWindowVisible(System.IntPtr)">
+            <summary>
+            Returns <c>true</c> if and only if the input window is visible
+            </summary>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.ILowLevelCaptureApi.CreateNonActiveForm">
+            <summary>
+            Creates a Form that cannot be activated.
+            </summary>
+        </member>
+        <member name="T:Applitools.Correlate.Capture.WindowCaptureInfo">
+            <summary>
+            Information related to a captured window.
+            </summary>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.WindowCaptureInfo.#ctor(System.IntPtr,System.Int32,System.Int32,System.String,System.Drawing.Rectangle,System.Drawing.Rectangle)">
+            <summary>
+            Creates a new <see cref="T:Applitools.Correlate.Capture.WindowCaptureInfo"/> instance.
+            </summary>
+        </member>
+        <member name="P:Applitools.Correlate.Capture.WindowCaptureInfo.Handle">
+            <summary>
+            The window handle
+            </summary>
+        </member>
+        <member name="P:Applitools.Correlate.Capture.WindowCaptureInfo.Process">
+            <summary>
+            The ID of the process owning the window
+            </summary>
+        </member>
+        <member name="P:Applitools.Correlate.Capture.WindowCaptureInfo.Thread">
+            <summary>
+            The ID of the thread owning the window
+            </summary>
+        </member>
+        <member name="P:Applitools.Correlate.Capture.WindowCaptureInfo.Caption">
+            <summary>
+            The window caption.
+            </summary>
+        </member>
+        <member name="P:Applitools.Correlate.Capture.WindowCaptureInfo.Window">
+            <summary>
+            The window area coordinates relative to the screen
+            </summary>
+        </member>
+        <member name="P:Applitools.Correlate.Capture.WindowCaptureInfo.Client">
+            <summary>
+            The window client area (the area delimited by the window borders and caption) 
+            coordinates relative to the screen
+            </summary>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.WindowCaptureInfo.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:Applitools.Correlate.Capture.Win.InactiveForm">
+            <summary>
+            A <see cref="T:System.Windows.Forms.Form"/> that cannot become active.
+            </summary>
+        </member>
+        <member name="P:Applitools.Correlate.Capture.Win.InactiveForm.CreateParams">
+            <inheritdoc />
+        </member>
+        <member name="T:Applitools.Correlate.Capture.Win.ScreenCaptureForm">
+            <summary>
+            A <see cref="T:System.Windows.Forms.Form"/> that captures the screen pixels of other windows while
+            hiding the cursor and placing a black background behind them.
+            </summary>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.Win.ScreenCaptureForm.#ctor(Applitools.Utils.Tracer)">
+            <summary>
+            Creates a new <see cref="T:Applitools.Correlate.Capture.Win.ScreenCaptureForm"/> instance.
+            </summary>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.Win.ScreenCaptureForm.TakeSnapshot(System.IntPtr,System.Boolean,Applitools.Utils.Geometry.RectangularMargin,System.Int32)">
+            <summary>
+            Takes a screen snapshot of the input window.
+            </summary>
+            <param name="window">Window to capture</param>
+            <param name="clientArea">
+            Whether to capture the client area or the full window
+            </param>
+            <param name="padding">
+            Inner padding defining the window region to capture or <c>null</c> to capture the
+            entire window
+            </param>
+            <param name="redrawWait">
+            Delay in milliseconds to allow the background window to draw
+            </param>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.Win.ScreenCaptureForm.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.Capture.Win.ScreenCaptureForm.CaptureWindowFromScreen_(System.IntPtr,System.Boolean,Applitools.Utils.Geometry.RectangularMargin,System.Int32)">
+            <summary>
+            Captures the screen area overlapping the input window or its client area
+            while placing this form as the window background which normalizes
+            transparent areas.
+            </summary>
+            <returns>The captured window image or <c>null</c> on failure</returns>
+        </member>
+        <member name="T:Applitools.Correlate.Capture.Win.WindowsLowLevelCaptureApi">
+            <summary>
+            A Window OS specific implementation of <see cref="T:Applitools.Correlate.Capture.ILowLevelCaptureApi"/>.
+            </summary>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.Win.WindowsLowLevelCaptureApi.#ctor(Applitools.Utils.Tracer)">
+            <summary>
+            Creates a new <see cref="T:Applitools.Correlate.Capture.Win.WindowsLowLevelCaptureApi"/> instance.
+            </summary>
+        </member>
+        <member name="E:Applitools.Correlate.Capture.Win.WindowsLowLevelCaptureApi.GuiEvent">
+            <inheritdoc />
+        </member>
+        <member name="P:Applitools.Correlate.Capture.Win.WindowsLowLevelCaptureApi.EventMask">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.Capture.Win.WindowsLowLevelCaptureApi.StartMonitoring(System.Boolean)">
+            <summary>
+            Start monitoring active applications.
+            </summary>
+            <param name="monitorHid">Whether or not to monitor HID actions</param>
+        </member>
+        <member name="M:Applitools.Correlate.Capture.Win.WindowsLowLevelCaptureApi.StartMonitoring">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.Capture.Win.WindowsLowLevelCaptureApi.StopMonitoring">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.Capture.Win.WindowsLowLevelCaptureApi.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.Capture.Win.WindowsLowLevelCaptureApi.PlaceWindowAbove(System.IntPtr,System.IntPtr)">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.Capture.Win.WindowsLowLevelCaptureApi.ActivateWindow(System.IntPtr)">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.Capture.Win.WindowsLowLevelCaptureApi.IsWindowVisible(System.IntPtr)">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.Capture.Win.WindowsLowLevelCaptureApi.CaptureWindow(System.IntPtr,System.Boolean,Applitools.Utils.Geometry.RectangularMargin,System.Boolean,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.Capture.Win.WindowsLowLevelCaptureApi.GetWindowFromPoint(System.Drawing.Point)">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.Capture.Win.WindowsLowLevelCaptureApi.GetAncestorWindow(System.IntPtr,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.Capture.Win.WindowsLowLevelCaptureApi.GetWindowInfo(System.IntPtr)">
+            <inheritdoc />  
+        </member>
+        <member name="M:Applitools.Correlate.Capture.Win.WindowsLowLevelCaptureApi.GetActiveWindow">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.Capture.Win.WindowsLowLevelCaptureApi.CreateNonActiveForm">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.Capture.Win.WindowsLowLevelCaptureApi.CaptureWindowFromWindow_(System.IntPtr,System.Boolean)">
+            <summary>
+            Captures the content of the input window or its client area.
+            </summary>
+        </member>
+        <member name="T:Applitools.Correlate.GuiCapture">
+            <summary>
+            The result of GUI capturing consisting of a window and a sequence of HID events.
+            </summary>
+        </member>
+        <member name="M:Applitools.Correlate.GuiCapture.#ctor(System.String,System.Drawing.Bitmap,System.Drawing.Point,System.Collections.Generic.IEnumerable{Applitools.Utils.Gui.GuiEventArgs},System.String,System.Collections.Generic.IEnumerable{Applitools.Utils.Geometry.IRegion})">
+            <summary>
+            Creates a new <see cref="T:Applitools.Correlate.GuiCapture"/> instance.
+            </summary>
+            <param name="windowTitle">Window title or <c>null</c> if unknown</param>
+            <param name="windowImage">Window image</param>
+            <param name="windowLocation">Window location relative to desktop</param>
+            <param name="hidEvents">Hid events or <c>null</c> if there are none</param>
+            <param name="windowId">Matching model window id or <c>null</c> if unknown</param>
+            <param name="ignore">An optional list of regions to ignore.</param>
+        </member>
+        <member name="M:Applitools.Correlate.GuiCapture.#ctor(System.String,System.Drawing.Bitmap)">
+            <summary>
+            Creates a new <see cref="T:Applitools.Correlate.GuiCapture"/> instance.
+            </summary>
+        </member>
+        <member name="P:Applitools.Correlate.GuiCapture.WindowTitle">
+            <summary>
+            The captured window title or <c>null</c> if unknown.
+            </summary>
+        </member>
+        <member name="P:Applitools.Correlate.GuiCapture.WindowLocator">
+            <summary>
+            The locator (e.g., URL) of the window if available.
+            </summary>
+        </member>
+        <member name="P:Applitools.Correlate.GuiCapture.WindowImage">
+            <summary>
+            The captured window image.
+            </summary>
+        </member>
+        <member name="P:Applitools.Correlate.GuiCapture.WindowLocation">
+            <summary>
+            The top-left corner of <see cref="P:Applitools.Correlate.GuiCapture.WindowImage"/> relative to the screen.
+            </summary>
+        </member>
+        <member name="P:Applitools.Correlate.GuiCapture.HidEvents">
+            <summary>
+            The sequence of HID events that occurred since the last capture.
+            </summary>
+        </member>
+        <member name="P:Applitools.Correlate.GuiCapture.WindowId">
+            <summary>
+            The id of a model window matching this capture or <c>null</c> if no such model 
+            window is known.
+            </summary>
+        </member>
+        <member name="P:Applitools.Correlate.GuiCapture.Ignore">
+            <summary>
+            Regions of <see cref="P:Applitools.Correlate.GuiCapture.WindowImage"/> that can be ignored and do not indicate window 
+            controls (i.e., window images).
+            </summary>
+        </member>
+        <member name="M:Applitools.Correlate.GuiCapture.Clone">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.GuiCapture.Clone(System.Boolean)">
+            <summary>
+            Clones this object.
+            </summary>
+            <param name="image">
+            If <c>false</c> the image is not cloned and set to <c>null</c></param>
+        </member>
+        <member name="M:Applitools.Correlate.GuiCapture.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Correlate.GuiCapture.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:Applitools.EyesWindowsBase">
+            <summary>
+            Applitools Eyes Coded UI API.
+            </summary>
+        </member>
+        <member name="M:Applitools.EyesWindowsBase.#ctor(System.Uri)">
+            <summary>
+            Creates a new Eyes instance that interacts with the Eyes Server at the 
+            specified url.
+            </summary>
+            <param name="serverUrl">The Eyes server URL.</param>
+        </member>
+        <member name="M:Applitools.EyesWindowsBase.#ctor">
+            <summary>
+            Creates a new Eyes instance that interacts with the Eyes cloud service.
+            </summary>
+        </member>
+        <member name="P:Applitools.EyesWindowsBase.ProcessId">
+            <summary>
+            The process id of the Application Under Test.
+            </summary>
+        </member>
+        <member name="M:Applitools.EyesWindowsBase.Check(System.String,Applitools.ICheckSettings)">
+            <summary>
+            Takes a snapshot of the application under test, where the capture area and settings
+            are given by <paramref name="checkSettings"/>.
+            </summary>
+            <param name="name">A tag to be associated with the match.</param>
+            <param name="checkSettings">A settings object defining the capture area and parameters.
+            Created fluently using the <see cref="T:Applitools.Target"/> static class.</param>
+        </member>
+        <member name="M:Applitools.EyesWindowsBase.OpenBase(System.Int32,System.String,System.String,System.Drawing.Size)">
+            <summary>
+            Starts a test.
+            </summary>
+            <param name="processId">The id of the process of the application under test.</param>
+            <param name="appName">The name of the application under test.</param>
+            <param name="testName">The test name.</param>
+            <param name="viewportSize">The required application's client area viewport size
+            or <c>Size.Empty</c> to allow any viewport size.</param>
+        </member>
+        <member name="M:Applitools.EyesWindowsBase.ScreenToClient(System.Drawing.Rectangle)">
+            <summary>
+            Gets the bounds of the input control relative to the client area of the 
+            current top level window.
+            </summary>
+        </member>
+        <member name="T:Applitools.Utils.Async.PeriodicAction">
+            <summary>
+            Periodic and on-demand async action trigger.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Async.PeriodicAction.#ctor(System.TimeSpan,System.Action,System.Boolean,System.String)">
+            <summary>
+            Triggers the input action periodically at the given interval.
+            </summary>
+            <param name="interval">Trigger interval. <c>TimeSpan.Zero</c> means never</param>
+            <param name="action">Action to perform periodically</param>
+            <param name="start">Whether or not to start dispatching actions</param>
+            <param name="name">Name of dispatch thread</param>
+        </member>
+        <member name="M:Applitools.Utils.Async.PeriodicAction.Start">
+            <summary>
+            Starts this periodic action if it wasn't started already.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Async.PeriodicAction.Trigger">
+            <summary>
+            Immediately triggers the action without blocking the caller and resets the interval 
+            until the next periodic trigger.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Async.PeriodicAction.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:Applitools.Utils.Async.SerialDequeueHandler`1">
+            <summary>
+            <see cref="T:Applitools.Utils.Async.SerialDequeue`1"/> dequeue handler signature.
+            </summary>
+        </member>
+        <member name="T:Applitools.Utils.Async.SerialDequeue`1">
+            <summary>
+            Dequeue items serially as soon as they are available.
+            </summary>
+            <remarks>Objects of this class are thread safe</remarks>
+        </member>
+        <member name="M:Applitools.Utils.Async.SerialDequeue`1.#ctor(Applitools.Utils.Async.SerialDequeueHandler{`0})">
+            <summary>
+            Creates a new <see cref="T:Applitools.Utils.Async.SerialDequeue`1"/> instance.
+            </summary>
+            <param name="dequeue">Handles dequeue callbacks</param>
+        </member>
+        <member name="M:Applitools.Utils.Async.SerialDequeue`1.Enqueue(`0)">
+            <summary>
+            Enqueue an item in the queue
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Async.SerialDequeue`1.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:Applitools.Utils.Config.IConfigurable`1">
+            <summary>
+            A configurable object.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Config.IConfigurable`1.Configure(Applitools.Utils.Config.IReadAccessor{`0})">
+            <summary>
+            Configures this objects given the input configuration reader.
+            </summary>
+        </member>
+        <member name="T:Applitools.Utils.Config.IReadAccessor`1">
+            <summary>
+            Allows reading <see cref="T:Applitools.Utils.Config.IConfigurable`1"/> items by name.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Config.IReadAccessor`1.TryGetValue(System.Object,System.String,`0@)">
+            <summary>
+            Outputs the value of the configuration item of the input name.
+            </summary>
+            <param name="client">The object performing the read</param>
+            <param name="name">The name of the item to read</param>
+            <param name="value">The items value</param>
+            <returns>
+            <c>false</c> if and only if an item of the input name does not exist.
+            </returns>
+        </member>
+        <member name="T:Applitools.Utils.Gui.GuiEventArgs">
+            <summary>
+            Base class for <see cref="E:Applitools.Utils.Gui.IGuiMonitor.GuiEvent"/> event arguments.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.GuiEventArgs.#ctor(System.DateTimeOffset,Applitools.Utils.Gui.GuiEventTypes)">
+            <summary>
+            Creates a new <see cref="T:Applitools.Utils.Gui.GuiEventArgs"/> instance.
+            </summary>
+        </member>
+        <member name="P:Applitools.Utils.Gui.GuiEventArgs.EventType">
+            <summary>
+            The type of this event.
+            </summary>
+        </member>
+        <member name="P:Applitools.Utils.Gui.GuiEventArgs.Timestamp">
+            <summary>
+            The time when this event occurred.
+            </summary>
+        </member>
+        <member name="P:Applitools.Utils.Gui.GuiEventArgs.IsKeyboardEvent">
+            <summary>
+            Whether the event is a keyboard related event.
+            </summary>
+        </member>
+        <member name="P:Applitools.Utils.Gui.GuiEventArgs.IsMouseEvent">
+            <summary>
+            Whether the event is a mouse related event.
+            </summary>
+        </member>
+        <member name="P:Applitools.Utils.Gui.GuiEventArgs.IsWindowEvent">
+            <summary>
+            Whether the event is a window event.
+            </summary>
+        </member>
+        <member name="T:Applitools.Utils.Gui.GuiEventTypes">
+            <summary>
+            GUI event types.
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.None">
+            <summary>
+            An unknown GUI event.
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.WindowActivated">
+            <summary>
+            Window became active.
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.WindowDeactivated">
+            <summary>
+            Window became inactive.
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.WindowGotFocus">
+            <summary>
+            Window got focus.
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.WindowLostFocus">
+            <summary>
+            Window lost focus.
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.WindowMoved">
+            <summary>
+            Window is moved.
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.WindowResized">
+            <summary>
+            Window is resized.
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.Window">
+            <summary>
+            A bitwise mask for all window events.
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.KeyDown">
+            <summary>
+            Keyboard key is down.
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.KeyUp">
+            <summary>
+            Keyboard key is up.
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.KeyPress">
+            <summary>
+            Keyboard key was pressed.
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.Keyboard">
+            <summary>
+            A bitwise mask for all keyboard events.
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.MouseButtonDown">
+            <summary>
+            Mouse button is down.
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.MouseButtonUp">
+            <summary>
+            Mouse button is up.
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.MouseButtonClick">
+            <summary>
+            Mouse button clicked.
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.MouseButton">
+            <summary>
+            Mouse button event.
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.MouseWheelScrolled">
+            <summary>
+            Mouse wheel is scrolled.
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.MouseMoved">
+            <summary>
+            Mouse is moved.
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.Mouse">
+            <summary>
+            A bitwise mask for all mouse events.
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.Hid">
+            <summary>
+            A bitwise mask for all human interface device events (i.e., keyboard, mouse, etc.)
+            </summary>
+        </member>
+        <member name="F:Applitools.Utils.Gui.GuiEventTypes.All">
+            <summary>
+            A bitwise mask for all events.
+            </summary>
+        </member>
+        <member name="T:Applitools.Utils.Gui.IGuiMonitor">
+            <summary>
+            A GUI monitor interface
+            </summary>
+        </member>
+        <member name="E:Applitools.Utils.Gui.IGuiMonitor.GuiEvent">
+            <summary>
+            Fired serially when GUI events occurs.
+            </summary>
+        </member>
+        <member name="P:Applitools.Utils.Gui.IGuiMonitor.EventMask">
+            <summary>
+            Gets or sets the set of events to be reported by this monitor.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.IGuiMonitor.StartMonitoring">
+            <summary>
+            Starts monitoring.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.IGuiMonitor.StopMonitoring">
+            <summary>
+            Stops monitoring.
+            </summary>
+        </member>
+        <member name="T:Applitools.Utils.Gui.KeyboardEventArgs">
+            <summary>
+            Keyboard event arguments
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.KeyboardEventArgs.#ctor(System.DateTimeOffset,Applitools.Utils.Gui.GuiEventTypes,System.Windows.Forms.Keys,System.Windows.Forms.Keys,System.Char)">
+            <summary>
+            Creates a new <see cref="T:Applitools.Utils.Gui.KeyboardEventArgs"/> instance.
+            </summary>
+        </member>
+        <member name="P:Applitools.Utils.Gui.KeyboardEventArgs.Handled">
+            <summary>
+            Whether or not the event is handled.
+            </summary>
+        </member>
+        <member name="P:Applitools.Utils.Gui.KeyboardEventArgs.Key">
+            <summary>
+            The changed key.
+            </summary>
+        </member>
+        <member name="P:Applitools.Utils.Gui.KeyboardEventArgs.Modifiers">
+            <summary>
+            Pressed key modifiers (i.e., <c>Shift</c>, <c>Control</c>, etc.).
+            </summary>
+        </member>
+        <member name="P:Applitools.Utils.Gui.KeyboardEventArgs.Char">
+            <summary>
+            The resulting character or <c>(char)0</c> if not applicable.
+            </summary>
+        </member>
+        <member name="P:Applitools.Utils.Gui.KeyboardEventArgs.Shift">
+            <summary>
+            Whether the shift key is pressed.
+            </summary>
+        </member>
+        <member name="P:Applitools.Utils.Gui.KeyboardEventArgs.Control">
+            <summary>
+            Whether the <c>Control</c> key is pressed.
+            </summary>
+        </member>
+        <member name="P:Applitools.Utils.Gui.KeyboardEventArgs.Alt">
+            <summary>
+            Whether the <c>Alt</c> key is pressed.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.KeyboardEventArgs.GetKeyCombination">
+            <summary>
+            Creates a <see cref="T:Applitools.Utils.Gui.KeyCombination"/> instance representing the key combination
+            of this keyboard event.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.KeyboardEventArgs.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:Applitools.Utils.Gui.KeyCombination">
+            <summary>
+            A combination of a keyboard key and zero or more modifiers.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.KeyCombination.#ctor">
+            <summary>
+            Creates a new <see cref="T:Applitools.Utils.Gui.KeyCombination"/> instance.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.KeyCombination.#ctor(System.Windows.Forms.Keys)">
+            <summary>
+            Creates a new <see cref="T:Applitools.Utils.Gui.KeyCombination"/> consisting of the input key.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.KeyCombination.#ctor(System.Windows.Forms.Keys,System.Windows.Forms.Keys)">
+            <summary>
+            Creates a new <see cref="T:Applitools.Utils.Gui.KeyCombination"/> consisting of the input key and modifiers.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.KeyCombination.#ctor(System.String)">
+            <summary>
+            Creates a new <see cref="T:Applitools.Utils.Gui.KeyCombination"/> instance that represents the key 
+            combination encoded in the input string.
+            </summary>
+        </member>
+        <member name="P:Applitools.Utils.Gui.KeyCombination.Key">
+            <summary>
+            Pressed key.
+            </summary>
+        </member>
+        <member name="P:Applitools.Utils.Gui.KeyCombination.Modifiers">
+            <summary>
+            Pressed modifiers (e.g., Shift, Alt, etc.).
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.KeyCombination.TryParseKeyCombination(System.String,Applitools.Utils.Gui.KeyCombination@)">
+            <summary>
+            Parses the input key combination.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.KeyCombination.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:Applitools.Utils.Gui.MouseEventArgs">
+            <summary>
+            Mouse event arguments.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.MouseEventArgs.#ctor(System.DateTimeOffset,Applitools.Utils.Gui.GuiEventTypes,System.Windows.Forms.MouseButtons,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a new <see cref="T:Applitools.Utils.Gui.MouseEventArgs"/> instance.
+            </summary>
+        </member>
+        <member name="P:Applitools.Utils.Gui.MouseEventArgs.Button">
+            <inheritdoc cref="P:System.Windows.Forms.MouseEventArgs.Button" />
+        </member>
+        <member name="P:Applitools.Utils.Gui.MouseEventArgs.Clicks">
+            <inheritdoc cref="P:System.Windows.Forms.MouseEventArgs.Clicks" />
+        </member>
+        <member name="P:Applitools.Utils.Gui.MouseEventArgs.X">
+            <inheritdoc cref="P:System.Windows.Forms.MouseEventArgs.X" />
+        </member>
+        <member name="P:Applitools.Utils.Gui.MouseEventArgs.Y">
+            <inheritdoc cref="P:System.Windows.Forms.MouseEventArgs.Y" />
+        </member>
+        <member name="P:Applitools.Utils.Gui.MouseEventArgs.Location">
+            <inheritdoc cref="P:System.Windows.Forms.MouseEventArgs.Location" />
+        </member>
+        <member name="P:Applitools.Utils.Gui.MouseEventArgs.Delta">
+            <inheritdoc cref="P:System.Windows.Forms.MouseEventArgs.Delta" />
+        </member>
+        <member name="P:Applitools.Utils.Gui.MouseEventArgs.WindowSize">
+            <summary>
+            The size of the window relative to which the coordinate of the mouse are provided
+            or <see cref="F:System.Drawing.Size.Empty"/> if the coordinates absolute.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.MouseEventArgs.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:Applitools.Utils.Gui.WindowEventArgs">
+            <summary>
+            Window event arguments.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.WindowEventArgs.#ctor(System.DateTimeOffset,Applitools.Utils.Gui.GuiEventTypes,System.IntPtr)">
+            <summary>
+            Creates a <see cref="T:Applitools.Utils.Gui.WindowEventArgs"/> instance.
+            </summary>
+        </member>
+        <member name="P:Applitools.Utils.Gui.WindowEventArgs.Window">
+            <summary>
+            Window handle.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.WindowEventArgs.ToString">
+            <inheritdoc />
+        </member>
+        <member name="T:Applitools.Utils.Gui.Win.MouseKeyboardMonitor">
+            <summary>
+            Monitors global mouse and keyboard activity.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.Win.MouseKeyboardMonitor.#ctor">
+            <summary>
+            Creates a new <see cref="T:Applitools.Utils.Gui.Win.MouseKeyboardMonitor"/> instance.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.Win.MouseKeyboardMonitor.Finalize">
+            <summary>
+            Uninstalls all hooks.
+            </summary>
+        </member>
+        <member name="E:Applitools.Utils.Gui.Win.MouseKeyboardMonitor.GuiEvent">
+            <inheritdoc />
+        </member>
+        <member name="P:Applitools.Utils.Gui.Win.MouseKeyboardMonitor.EventMask">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Utils.Gui.Win.MouseKeyboardMonitor.StartMonitoring">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Utils.Gui.Win.MouseKeyboardMonitor.StartMonitoring(System.Boolean,System.Boolean)">
+            <summary>
+            Installs a mouse and / or keyboard hooks and starts monitoring.
+            </summary>
+            <param name="installMouseHook">
+            Whether to install the global mouse hook (required for mouse events monitoring).
+            </param>
+            <param name="installKeyboardHook">
+            Whether to install the keyboard hook (required for keyboard events monitoring).
+            </param>
+            <exception cref="T:System.ComponentModel.Win32Exception">Windows Api error occurred</exception>
+        </member>
+        <member name="M:Applitools.Utils.Gui.Win.MouseKeyboardMonitor.StopMonitoring">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Utils.Gui.Win.MouseKeyboardMonitor.StopMonitoring(System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Stop monitoring keyboard and / or mouse events.
+            </summary>
+            <param name="uninstallMouseHook">Whether to uninstall the mouse hook</param>
+            <param name="uninstallKeyboardHook">Whether to uninstall the keyboard hook</param>
+            <param name="throwEx">Whether to throw exceptions on errors</param>
+            <exception cref="T:System.ComponentModel.Win32Exception">Windows API error</exception>
+        </member>
+        <member name="M:Applitools.Utils.Gui.Win.MouseKeyboardMonitor.Dispose">
+            <summary>
+            <inheritdoc />
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.Win.MouseKeyboardMonitor.Dispose(System.Boolean)">
+            <summary>
+            Disposes of managed and unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.Win.MouseKeyboardMonitor.FireGuiEvent_(Applitools.Utils.Gui.Win.MouseKeyboardMonitor.HookCallback_)">
+            <summary>
+            Fires a the gui event that corresponds to the input keyboard or mouse hook callback.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.Win.MouseKeyboardMonitor.IsEventEnabled_(Applitools.Utils.Gui.GuiEventTypes)">
+            <summary>
+            Returns <c>true</c> if and only if the input event is masked by the event mask.
+            </summary>
+        </member>
+        <member name="T:Applitools.Utils.Gui.Win.MouseKeyboardMonitor.HookCallback_">
+            <summary>
+            Keyboard and mouse hook callback parameters.
+            </summary>
+        </member>
+        <member name="T:Applitools.Utils.Gui.Win.WindowMonitor">
+            <summary>
+            Monitors window activity.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.Win.WindowMonitor.#ctor(System.Int32)">
+            <summary>
+            Creates a new <see cref="T:Applitools.Utils.Gui.Win.WindowMonitor"/> instance.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.Win.WindowMonitor.#ctor">
+            <summary>
+            Creates a new <see cref="T:Applitools.Utils.Gui.Win.WindowMonitor"/> instance.
+            </summary>
+        </member>
+        <member name="E:Applitools.Utils.Gui.Win.WindowMonitor.GuiEvent">
+            <inheritdoc />
+        </member>
+        <member name="P:Applitools.Utils.Gui.Win.WindowMonitor.EventMask">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Utils.Gui.Win.WindowMonitor.StartMonitoring">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Utils.Gui.Win.WindowMonitor.StopMonitoring">
+            <inheritdoc />
+        </member>
+        <member name="M:Applitools.Utils.Gui.Win.WindowMonitor.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Applitools.Utils.Gui.Win.WindowsGuiUtils">
+            <summary>
+            Windows GUI utils.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.Gui.Win.WindowsGuiUtils.GetWindowRectangles(Applitools.Utils.Tracer,System.IntPtr,Applitools.Utils.Gui.Win.SafeNativeMethods.RECT@,Applitools.Utils.Gui.Win.SafeNativeMethods.RECT@)">
+            <summary>
+            Returns the coordinates of the window and client area (including the Main Menu)
+            relative to the screen.
+            </summary>
+            <remarks>
+            This method exists since some windows (e.g., Calculator main window) report
+            a window size that is smaller than it really is.
+            </remarks>
+        </member>
+        <member name="M:Applitools.Utils.Gui.Win.WindowsGuiUtils.ChangeWindowZOrder(Applitools.Utils.Tracer,System.IntPtr,System.IntPtr,System.Boolean,System.Boolean)">
+            <summary>
+            Places <c>window</c> directly below <c>belowWindow</c>.
+            </summary>
+            <param name="tracer">The program execution tracer.</param>
+            <param name="window">Window which position is to be changed.</param>
+            <param name="belowWindow">Window under which <c>window</c> is to be positioned.</param>
+            <param name="block">Whether to wait until window is repositioned.</param>
+            <param name="activate">Weather to activate the window when swapping to it, or not. Defaults to <c>false</c>.</param>
+            <returns>Whether the operation succeeded</returns>
+        </member>
+        <member name="T:Applitools.Windows.Eyes">
+            <summary>
+            Applitools Eyes Windows API.
+            </summary>
+        </member>
+        <member name="M:Applitools.Windows.Eyes.#ctor(System.Uri)">
+            <summary>
+            Creates a new Eyes instance that interacts with the Eyes Server at the 
+            specified url.
+            </summary>
+            <param name="serverUrl">The Eyes server URL.</param>
+        </member>
+        <member name="M:Applitools.Windows.Eyes.#ctor(System.String)">
+            <summary>
+            Creates a new Eyes instance that interacts with the Eyes Server at the 
+            specified url.
+            </summary>
+            <param name="serverUrl">The Eyes server URL.</param>
+        </member>
+        <member name="M:Applitools.Windows.Eyes.#ctor">
+            <summary>
+            Creates a new Eyes instance that interacts with the Eyes cloud service.
+            </summary>
+        </member>
+        <member name="M:Applitools.Windows.Eyes.Open(System.Int32,System.String,System.String,System.Drawing.Size)">
+            <summary>
+            Starts a test.
+            </summary>
+            <param name="processId">The process id of the application under test.</param>
+            <param name="appName">The name of the application under test.</param>
+            <param name="testName">The test name.</param>
+            <param name="viewportSize">The required application's client area viewport size
+            or <c>Size.Empty</c> to allow any viewport size.</param>
+        </member>
+        <member name="M:Applitools.Windows.Eyes.Open(System.Int32,System.String,System.String)">
+            <summary>
+            Starts a new test that does not dictate the viewport size of the application under 
+            test.
+            </summary>
+        </member>
+        <member name="M:Applitools.Windows.Eyes.CheckWindow(System.String)">
+            <summary>
+            Takes a snapshot of the application under test and matches it with
+            the expected output.
+            </summary>
+            <param name="tag">An optional tag to be associated with the snapshot.</param>
+            <exception cref="T:Applitools.TestFailedException">
+            Thrown if a mismatch is detected and immediate failure reports are enabled.</exception>
+        </member>
+        <member name="M:Applitools.Windows.Eyes.CheckWindow(System.TimeSpan,System.String)">
+            <summary>
+            Takes a snapshot of the application under test and matches it with
+            the expected output.
+            </summary>
+            <param name="matchTimeout">The amount of time to retry matching</param>
+            <param name="tag">An optional tag to be associated with the snapshot.</param>
+            <exception cref="T:Applitools.TestFailedException">
+            Thrown if a mismatch is detected and immediate failure reports are enabled.</exception>
+        </member>
+        <member name="M:Applitools.Windows.Eyes.CheckRegion(System.Drawing.Rectangle,System.String)">
+            <summary>
+            Takes a snapshot of specified region of the application under test and matches it with
+            the expected output.
+            </summary>
+            <param name="region">The region to check.</param>
+            <param name="tag">An optional tag to be associated with the snapshot.</param>
+            <exception cref="T:Applitools.TestFailedException">
+            Thrown if a mismatch is detected and immediate failure reports are enabled.</exception>
+        </member>
+        <member name="M:Applitools.Windows.Eyes.CheckRegion(System.Drawing.Rectangle,System.TimeSpan,System.String)">
+            <summary>
+            Takes a snapshot of specified region of the application under test and matches it with
+            the expected output.
+            </summary>
+            <param name="region">The region to check.</param>
+            <param name="matchTimeout">The amount of time to retry matching</param>
+            <param name="tag">An optional tag to be associated with the snapshot.</param>
+            <exception cref="T:Applitools.TestFailedException">
+            Thrown if a mismatch is detected and immediate failure reports are enabled.</exception>
+        </member>
+        <member name="M:Applitools.Windows.Eyes.InRegion(System.Drawing.Rectangle)">
+            <summary>
+            Specifies a region of the current application window.
+            </summary>
+        </member>
+    </members>
+</doc>
