@@ -1,23 +1,28 @@
-﻿using NUnit.Framework;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.Extensions;
-using Applitools.Selenium;
-using System.Drawing;
-using System;
-using OpenQA.Selenium;
-using Applitools;
-
-namespace SeleniumTest
+﻿namespace SeleniumTest
 {
+
+    using NUnit.Framework;
+
+    using System.Drawing;
+    using System;
+    using Applitools;
+    using Applitools.Selenium;
+    using OpenQA.Selenium.Chrome;
+    using OpenQA.Selenium.Firefox;
+    using OpenQA.Selenium.Safari;
+ 
+
     [TestFixture()]
     public class Test
     {
         [Test()]
         public void TestCase()
         {
+
             var driver = new ChromeDriver();
-			var eyes = new Eyes();
-			eyes.ApiKey = "9RkMajXrzS1Zu110oTWQps102CHiPRPmeyND99E9iL0G7yAc110";
+            var eyes = new Eyes();
+						
+            eyes.ApiKey = "9RkMajXrzS1Zu110oTWQps102CHiPRPmeyND99E9iL0G7yAc110";
             eyes.ForceFullPageScreenshot = true;
             eyes.StitchMode = StitchModes.CSS;
 

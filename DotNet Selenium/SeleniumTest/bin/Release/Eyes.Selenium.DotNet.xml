@@ -121,18 +121,18 @@
             Takes a snapshot of the specified region of the application under test and matches it 
             with the expected region output.
             </summary>
-            <param name="selector">Selects the region to check</param>
+            <param name="selector">Selects the region to check.</param>
             <param name="tag">An optional tag to be associated with the snapshot.</param>
             <param name="matchTimeout">The amount of milliseconds to retry matching</param>
             <exception cref="T:Applitools.TestFailedException">
             Thrown if a mismatch is detected and immediate failure reports are enabled.</exception>
         </member>
-        <member name="M:Applitools.Selenium.Eyes.CheckRegion_(OpenQA.Selenium.By,System.String,Applitools.ICheckSettings)">
+        <member name="M:Applitools.Selenium.Eyes.CheckRegion_(OpenQA.Selenium.IWebElement,System.String,Applitools.ICheckSettings)">
             <summary>
             Takes a snapshot of the specified region of the application under test and matches it 
             with the expected region output.
             </summary>
-            <param name="selector">Selects the region to check</param>
+            <param name="targetElement">The web element to check.</param>
             <param name="tag">An optional tag to be associated with the snapshot.</param>
             <param name="checkSettings">The settings for the match.</param>
             <exception cref="T:Applitools.TestFailedException">
@@ -303,19 +303,15 @@
             <param name="forceQuery">If true, we will perform the query even if we have a cached viewport size.</param>
             <returns>The viewport size of the default content (outer most frame).</returns>
         </member>
-        <member name="M:Applitools.Selenium.EyesWebDriver.GetFullPageScreenshot(Applitools.Utils.IPositionProvider,Applitools.Utils.IPositionProvider,Applitools.Utils.ScaleProviderFactory,System.Int32)">
+        <member name="M:Applitools.Selenium.EyesWebDriver.GetFullPageScreenshot(Applitools.Utils.IPositionProvider,Applitools.Utils.IPositionProvider,Applitools.Utils.ScaleProviderFactory,System.Int32,Applitools.Positioning.IRegionPositionCompensation)">
             <summary>
-            Creates a full page image by scrolling the viewport and "stitching" the screenshots to 
-            each other.  
+            Creates a full page image by scrolling the viewport and "stitching" the screenshots to each other.  
             </summary>
-            <param name="originProvider">A position provider as defined 
-            by <see cref="M:Applitools.FullPageCaptureAlgorithm.GetFullPageScreenshot(Applitools.Logger,Applitools.Utils.IPositionProvider,Applitools.Utils.IPositionProvider,Applitools.Utils.ScaleProviderFactory,System.Int32,Applitools.IDebugScreenshotProvider,System.Func{System.Byte[]},System.Func{System.Drawing.Bitmap,Applitools.EyesScreenshot})" />. </param>
-            <param name="stitchProvider">A position provider as 
-            defined by <see cref="M:Applitools.FullPageCaptureAlgorithm.GetFullPageScreenshot(Applitools.Logger,Applitools.Utils.IPositionProvider,Applitools.Utils.IPositionProvider,Applitools.Utils.ScaleProviderFactory,System.Int32,Applitools.IDebugScreenshotProvider,System.Func{System.Byte[]},System.Func{System.Drawing.Bitmap,Applitools.EyesScreenshot})" />. </param>
-            <param name="scaleProviderFactory">The scale provider to use for each screenshot composing 
-            the full page screenshot.</param> 
-            <param name="waitBeforeScreenshots">The amount of time to wait before taking a 
-            screenshot. (Milliseconds)</param>
+            <param name="originProvider">A position provider as defined by <see cref="M:Applitools.FullPageCaptureAlgorithm.GetFullPageScreenshot(Applitools.Logger,Applitools.Utils.IPositionProvider,Applitools.Utils.IPositionProvider,Applitools.Utils.ScaleProviderFactory,System.Int32,Applitools.IDebugScreenshotProvider,Applitools.Capture.IImageProvider,System.Func{System.Drawing.Bitmap,Applitools.EyesScreenshot},Applitools.Utils.Cropping.ICutProvider,Applitools.Positioning.IRegionPositionCompensation)" />.</param>
+            <param name="stitchProvider">A position provider as defined by <see cref="M:Applitools.FullPageCaptureAlgorithm.GetFullPageScreenshot(Applitools.Logger,Applitools.Utils.IPositionProvider,Applitools.Utils.IPositionProvider,Applitools.Utils.ScaleProviderFactory,System.Int32,Applitools.IDebugScreenshotProvider,Applitools.Capture.IImageProvider,System.Func{System.Drawing.Bitmap,Applitools.EyesScreenshot},Applitools.Utils.Cropping.ICutProvider,Applitools.Positioning.IRegionPositionCompensation)" />.</param>
+            <param name="scaleProviderFactory">The scale provider to use for each screenshot composing the full page screenshot.</param> 
+            <param name="waitBeforeScreenshots">The amount of time to wait before taking a screenshot. (Milliseconds)</param>
+            <param name="regionPositionCompensation">A class used to compensate for region offsets in various browsers.</param>
             <returns>The image of the entire page.</returns>
         </member>
         <member name="F:Applitools.Selenium.EyesWebDriverScreenshot.frameWindow_">
@@ -404,6 +400,9 @@
             Returns the inner size of the current frame.
             </summary>
             <returns>The inner size of the current frame.</returns>
+        </member>
+        <member name="M:Applitools.Selenium.FrameChain.GetDefaultContentScrollPosition">
+            <returns>The outermost frame's location, or NoFramesException.</returns>
         </member>
         <member name="T:Applitools.Selenium.InRegion">
             <summary>

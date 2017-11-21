@@ -1,6 +1,6 @@
 ﻿<Properties StartupConfiguration="{66EAA237-5459-4A71-95D5-0A6AFD0825F1}|Unit Tests">
   <MonoDevelop.Ide.ItemProperties.SeleniumTest PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="SeleniumTest/packages.config">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SeleniumTest/Test.cs">
     <Files>
       <File FileName="SeleniumTest/Test.cs" Line="23" Column="13" />
       <File FileName="SeleniumTest/packages.config" Line="5" Column="50" />

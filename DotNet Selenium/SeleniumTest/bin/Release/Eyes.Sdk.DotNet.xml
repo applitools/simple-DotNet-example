@@ -19,6 +19,11 @@
             Whether or not the image matched the expected baseline image.
             </summary>
         </member>
+        <member name="M:Applitools.Exceptions.DiffsFoundException.#ctor(Applitools.TestResults,System.String,System.String,System.String)">
+            <summary>
+            Creates a new <see cref="T:Applitools.Exceptions.DiffsFoundException"/> instance.
+            </summary>
+        </member>
         <member name="T:Applitools.ExactMatchSettings">
             <summary>
             Encapsulates settings for the "Exact" match level.
@@ -111,6 +116,24 @@
             creates a new <see cref="T:Applitools.FixedScaleProvider" /> instance.
             </summary>
             <param name="scaleRatio">The scale ratio to use.</param>
+        </member>
+        <member name="T:Applitools.Utils.SystemUtils">
+            <summary>
+            Operating system utilities.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.SystemUtils.GetProcessName(System.Int32,Applitools.ILogHandler)">
+            <summary>
+            Returns the name of the process of the input id or <c>null</c> if unknown.
+            </summary>
+        </member>
+        <member name="M:Applitools.Utils.UserAgent.ParseUserAgentString(System.String,System.Boolean)">
+            <summary>
+            Parses the input user-agent string.
+            </summary>
+            <param name="userAgent">User agent string to parse</param>
+            <param name="unknowns">Whether to treat unknown products as <c>Unknown</c> or
+            throw exceptions</param>
         </member>
         <member name="T:Applitools.CheckSettings">
             <summary>
@@ -1227,6 +1250,11 @@
             Whether or not this is a new test.
             </summary>
         </member>
+        <member name="P:Applitools.TestResults.Status">
+            <summary>
+            The test status.
+            </summary>
+        </member>
         <member name="P:Applitools.TestResults.IsPassed">
             <summary>
             Whether or not this test passed.
@@ -1347,7 +1375,7 @@
             The concrete trigger type.
             </summary>
         </member>
-        <member name="M:Applitools.FullPageCaptureAlgorithm.GetScreenshotAsBitmap(Applitools.Logger,Applitools.Utils.IPositionProvider,Applitools.Utils.IPositionProvider,Applitools.Utils.ScaleProviderFactory,Applitools.Utils.Geometry.Region,System.Int32,Applitools.IDebugScreenshotProvider,System.Func{System.Byte[]},System.Func{System.Drawing.Bitmap,Applitools.EyesScreenshot})">
+        <member name="M:Applitools.FullPageCaptureAlgorithm.GetScreenshotAsBitmap(Applitools.Logger,Applitools.Utils.IPositionProvider,Applitools.Utils.IPositionProvider,Applitools.Utils.ScaleProviderFactory,Applitools.Utils.Geometry.Region,System.Int32,Applitools.IDebugScreenshotProvider,Applitools.Capture.IImageProvider,System.Func{System.Drawing.Bitmap,Applitools.EyesScreenshot},Applitools.Utils.Cropping.ICutProvider,Applitools.Positioning.IRegionPositionCompensation)">
             <summary>
             Encapsulates an algorithm for creating full-page images of a page.
             </summary>
@@ -1363,11 +1391,13 @@
             <param name="region"></param>
             <param name="waitBeforeScreenshots">The time to wait before a call for capturing a screenshot. Used mainly for allowing the page to stabilize after a position was set.</param>
             <param name="debugScreenshotProvider">An object responsible for storing the intermediate images created in the process, for debugging purposes.</param>
-            <param name="getScreenshotBytes">The function used for actually taking sceeenshots.</param>
+            <param name="imageProvider">The screenshot image provider.</param>
             <param name="getEyesScreenshot">The function used to create an <see cref="T:Applitools.EyesScreenshot"/> object from the actual screenshot image.</param>
-            <returns>The screenshot as PNG byte array.</returns>
+            <param name="cutProvider">The cut provider used for custom cropping.</param>
+            <param name="regionPositionCompensation">A class used to compensate for region offsets in various browsers.</param>
+            <returns>The screenshot as Bitmap.</returns>
         </member>
-        <member name="M:Applitools.FullPageCaptureAlgorithm.GetFullPageScreenshotAsBitmap(Applitools.Logger,Applitools.Utils.IPositionProvider,Applitools.Utils.IPositionProvider,Applitools.Utils.ScaleProviderFactory,System.Int32,Applitools.IDebugScreenshotProvider,System.Func{System.Byte[]},System.Func{System.Drawing.Bitmap,Applitools.EyesScreenshot})">
+        <member name="M:Applitools.FullPageCaptureAlgorithm.GetFullPageScreenshotAsBitmap(Applitools.Logger,Applitools.Utils.IPositionProvider,Applitools.Utils.IPositionProvider,Applitools.Utils.ScaleProviderFactory,System.Int32,Applitools.IDebugScreenshotProvider,Applitools.Capture.IImageProvider,System.Func{System.Drawing.Bitmap,Applitools.EyesScreenshot},Applitools.Utils.Cropping.ICutProvider,Applitools.Positioning.IRegionPositionCompensation)">
             <summary>
             Encapsulates an algorithm for creating full-page images of a page.
             </summary>
@@ -1382,11 +1412,13 @@
             <param name="scaleProviderFactory"></param>
             <param name="waitBeforeScreenshots">The time to wait before a call for capturing a screenshot. Used mainly for allowing the page to stabilize after a position was set.</param>
             <param name="debugScreenshotProvider">An object responsible for storing the intermediate images created in the process, for debugging purposes.</param>
-            <param name="getScreenshotBytes">The function used for actually taking sceeenshots.</param>
+            <param name="imageProvider">The screenshot image provider.</param>
             <param name="getEyesScreenshot">The function used to create an <see cref="T:Applitools.EyesScreenshot"/> object from the actual screenshot image.</param>
-            <returns>The screenshot as PNG byte array.</returns>
+            <param name="cutProvider">The cut provider used for custom cropping.</param>
+            <param name="regionPositionCompensation">A class used to compensate for region offsets in various browsers.</param>
+            <returns>The screenshot as Bitmap.</returns>
         </member>
-        <member name="M:Applitools.FullPageCaptureAlgorithm.GetFullPageScreenshot(Applitools.Logger,Applitools.Utils.IPositionProvider,Applitools.Utils.IPositionProvider,Applitools.Utils.ScaleProviderFactory,System.Int32,Applitools.IDebugScreenshotProvider,System.Func{System.Byte[]},System.Func{System.Drawing.Bitmap,Applitools.EyesScreenshot})">
+        <member name="M:Applitools.FullPageCaptureAlgorithm.GetFullPageScreenshot(Applitools.Logger,Applitools.Utils.IPositionProvider,Applitools.Utils.IPositionProvider,Applitools.Utils.ScaleProviderFactory,System.Int32,Applitools.IDebugScreenshotProvider,Applitools.Capture.IImageProvider,System.Func{System.Drawing.Bitmap,Applitools.EyesScreenshot},Applitools.Utils.Cropping.ICutProvider,Applitools.Positioning.IRegionPositionCompensation)">
             <summary>
             Encapsulates an algorithm for creating full-page images of a page.
             </summary>
@@ -1401,8 +1433,31 @@
             <param name="scaleProviderFactory"></param>
             <param name="waitBeforeScreenshots">The time to wait before a call for capturing a screenshot. Used mainly for allowing the page to stabilize after a position was set.</param>
             <param name="debugScreenshotProvider">An object responsible for storing the intermediate images created in the process, for debugging purposes.</param>
-            <param name="getScreenshotBytes">The function used for actually taking sceeenshots.</param>
+            <param name="imageProvider">The screenshot image provider.</param>
             <param name="getEyesScreenshot">The function used to create an <see cref="T:Applitools.EyesScreenshot"/> object from the actual screenshot image.</param>
+            <param name="cutProvider">The cut provider used for custom cropping.</param>
+            <param name="regionPositionCompensation">A class used to compensate for region offsets in various browsers.</param>
+            <returns>The screenshot as PNG byte array.</returns>
+        </member>
+        <member name="M:Applitools.FullPageCaptureAlgorithm.GetFullPageScreenshot(Applitools.Logger,Applitools.Utils.IPositionProvider,Applitools.Utils.IPositionProvider,Applitools.Utils.ScaleProviderFactory,System.Int32,Applitools.IDebugScreenshotProvider,System.Func{System.Byte[]},System.Func{System.Drawing.Bitmap,Applitools.EyesScreenshot},Applitools.Utils.Cropping.ICutProvider,Applitools.Positioning.IRegionPositionCompensation)">
+            <summary>
+            Encapsulates an algorithm for creating full-page images of a page.
+            </summary>
+            <param name="logger">The logger to use.</param>
+            <param name="originProvider">A position provider used for saving the state before 
+            starting the stitching, as well as moving to (0,0). The reason it is separated from 
+            the <c>stitchProvider</c>is that the stitchProvider might have side-effects 
+            (e.g., changing the CSS transform of the page can cause a layout change at the 
+            top of the page), which we can avoid for the first screenshot (since it might be a 
+            full page screenshot anyway).</param>
+            <param name="stitchProvider">The position provider used for moving to the actual stitch points.</param>
+            <param name="scaleProviderFactory"></param>
+            <param name="waitBeforeScreenshots">The time to wait before a call for capturing a screenshot. Used mainly for allowing the page to stabilize after a position was set.</param>
+            <param name="debugScreenshotProvider">An object responsible for storing the intermediate images created in the process, for debugging purposes.</param>
+            <param name="getScreenshotBytes">The function used to get the screenshot bytes.</param>
+            <param name="getEyesScreenshot">The function used to create an <see cref="T:Applitools.EyesScreenshot"/> object from the actual screenshot image.</param>
+            <param name="cutProvider">The cut provider used for custom cropping.</param>
+            <param name="regionPositionCompensation">A class used to compensate for region offsets in various browsers.</param>
             <returns>The screenshot as PNG byte array.</returns>
         </member>
     </members>
