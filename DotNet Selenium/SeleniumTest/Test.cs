@@ -22,7 +22,7 @@
             var driver = new ChromeDriver();
             var eyes = new Eyes();
 						
-            eyes.ApiKey = "9RkMajXrzS1Zu110oTWQps102CHiPRPmeyND99E9iL0G7yAc110";
+            eyes.ApiKey = "your-applitools-key";
             eyes.ForceFullPageScreenshot = true;
             eyes.StitchMode = StitchModes.CSS;
 
