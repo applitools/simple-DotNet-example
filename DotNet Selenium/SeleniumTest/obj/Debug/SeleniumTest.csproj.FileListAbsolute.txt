@@ -31,6 +31,8 @@
 /Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Debug/Eyes.Selenium.DotNet.dll
 /Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Debug/Eyes.Utils.DotNet.dll
 /Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Debug/Ionic.Zip.Reduced.dll
+/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Debug/log4net.dll
+/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Debug/Newtonsoft.Json.dll
 /Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Debug/nunit.framework.dll
 /Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Debug/WebDriver.dll
 /Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Debug/WebDriver.Support.dll
@@ -38,6 +40,8 @@
 /Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Debug/Castle.Core.xml
 /Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Debug/WebDriver.xml
 /Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Debug/WebDriver.Support.xml
+/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Debug/Newtonsoft.Json.xml
+/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Debug/log4net.xml
 /Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Debug/Eyes.Sdk.DotNet.xml
 /Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Debug/Eyes.Selenium.DotNet.xml
 /Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/obj/Debug/SeleniumTest.csprojResolveAssemblyReference.cache

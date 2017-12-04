@@ -1,8 +1,6 @@
-﻿namespace SeleniumTest
+namespace SeleniumTest
 {
-
     using NUnit.Framework;
-
     using System.Drawing;
     using System;
     using Applitools;
@@ -10,7 +8,7 @@
     using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.Firefox;
     using OpenQA.Selenium.Safari;
- 
+    using OpenQA.Selenium;
 
     [TestFixture()]
     public class Test
@@ -21,39 +19,44 @@
 
             var driver = new ChromeDriver();
             var eyes = new Eyes();
-						
-            eyes.ApiKey = "9RkMajXrzS1Zu110oTWQps102CHiPRPmeyND99E9iL0G7yAc110";
+
+            eyes.ApiKey = "your-applitools-key";
             eyes.ForceFullPageScreenshot = true;
             eyes.StitchMode = StitchModes.CSS;
+            eyes.MatchTimeout = TimeSpan.FromSeconds(5);
 
             try
             {
                 driver.Navigate().GoToUrl("http://applitools.com");
 
-                eyes.Open(driver, "www.applitools.com", "Home", new Size(1006, 677));
+                eyes.Open(driver, "www.applitools.com", "Home", new Size(1300, 750));
 
-				eyes.CheckWindow("Home");
+                //home page
+                eyes.CheckWindow("Home");
 
-				driver.FindElement(OpenQA.Selenium.By.PartialLinkText("Features")).Click();
-				eyes.CheckWindow(TimeSpan.FromSeconds(5), "Features");
+                //features page
+                driver.FindElement(By.PartialLinkText("Features")).Click();
+                eyes.CheckWindow(TimeSpan.FromSeconds(5), "Features");
+                eyes.CheckRegion(By.CssSelector("div.panel.unpadded.welcome-message"), TimeSpan.FromSeconds(5), "Welcome Message");
 
+                //signup page
+                driver.FindElement(By.CssSelector("a.btn.btn-call-to-action")).Click();
+                eyes.Check("Sign Up", Applitools.Selenium.Target.Window().Fully().Timeout(TimeSpan.FromSeconds(5)));
+                //Ignore(By.CssSelector("button.btn.btn-call-to-action")
 
-                eyes.CheckRegion(OpenQA.Selenium.By.CssSelector("div.panel.unpadded.welcome-message"), "Feature Area");
+                TestResults testResults = eyes.Close(false);
+                Assert.IsTrue(testResults.IsPassed); 
 
-				driver.FindElement(OpenQA.Selenium.By.CssSelector("a.btn.btn-call-to-action")).Click();
-				
-                eyes.CheckWindow("Sign Up");
-
-                eyes.Close();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
+
             }
             finally
             {
-
                 driver.Close();
+                eyes.AbortIfNotClosed();
             }
         }
     }

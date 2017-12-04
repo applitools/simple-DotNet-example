@@ -24,31 +24,3 @@
 /Users/justin/Projects/SeleniumTest/SeleniumTest/bin/Release/Eyes.Selenium.DotNet.xml
 /Users/justin/Projects/SeleniumTest/SeleniumTest/obj/Release/SeleniumTest.csproj.CoreCompileInputs.cache
 /Users/justin/Projects/SeleniumTest/SeleniumTest/obj/Release/SeleniumTest.dll
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/NUnit3.TestAdapter.dll
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/nunit.engine.dll
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/nunit.engine.api.dll
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/Mono.Cecil.dll
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/Mono.Cecil.Pdb.dll
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/Mono.Cecil.Mdb.dll
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/Mono.Cecil.Rocks.dll
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/SeleniumTest.dll
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/Castle.Core.dll
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/Eyes.Sdk.DotNet.dll
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/Eyes.Selenium.DotNet.dll
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/Eyes.Utils.DotNet.dll
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/Ionic.Zip.Reduced.dll
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/log4net.dll
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/Newtonsoft.Json.dll
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/nunit.framework.dll
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/WebDriver.dll
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/WebDriver.Support.dll
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/nunit.framework.xml
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/Castle.Core.xml
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/WebDriver.xml
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/WebDriver.Support.xml
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/Newtonsoft.Json.xml
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/log4net.xml
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/Eyes.Sdk.DotNet.xml
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/bin/Release/Eyes.Selenium.DotNet.xml
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/obj/Release/SeleniumTest.csproj.CoreCompileInputs.cache
-/Users/justin/repos/applitools/simple-c--example/DotNet Selenium/SeleniumTest/obj/Release/SeleniumTest.dll
